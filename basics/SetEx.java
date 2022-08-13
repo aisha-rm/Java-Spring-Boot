@@ -4,7 +4,7 @@ public class SetEx {
     //find duplicate characters in a string
     public static String findDuplicates(String input){
         Set<Character> seen = new TreeSet<Character>();
-        ArrayList<Character> duplicates = new ArrayList<Character>(); 
+        ArrayList<Character> duplicates = new ArrayList<Character>(); 1
         for (int i = 0; i < input.length(); i++){
             if (seen.contains(input.charAt(i))){
                 duplicates.add(input.charAt(i));
@@ -14,7 +14,7 @@ public class SetEx {
         }
         //System.out.print(seen);
         //System.out.println(duplicates);
-        System.out.println(duplicates.toString(duplicates));
+       // System.out.println(duplicates.toString(duplicates));
         return "";
     }
 
