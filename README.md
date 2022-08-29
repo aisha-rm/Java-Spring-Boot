@@ -1,2 +1,1 @@
-# Learning-Java
-practising java 
+# Learning Java Springboot framework
