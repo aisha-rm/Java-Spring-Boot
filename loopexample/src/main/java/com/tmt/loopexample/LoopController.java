@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoopController {
     //create a list of objects that will be stored in the model
     //and be used in a loop to create a table of employees in the html template
-    //create it here and not inside the handler method as to prevent duplicating the data when the handler is called multiple times eg when a page is refreshed
+    //create it here and not inside the handler method as to prevent duplicating 
+    //the data when the handler is called multiple times eg when a page is refreshed
     List<Employee> employees = Arrays.asList(
         new Employee("Jim Halpert", 32, "Salesman"),
         new Employee("Andy Bernard", 38, "Salesman"),
