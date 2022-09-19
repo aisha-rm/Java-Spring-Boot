@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/form-stylesheet.css}" rel="stylesheet"/>
+    <title>Form</title>
+</head>
+<body>
+    <div class="topnav">
+        <a>Form</a>
+        <a>Grades</a>
+    </div>
+    <div class="container">
+        <h2>Grade Portal</h2>
+        <!--the form below is bound to an object in the model using th:object
+        selection expression is now used to bind each field in the form to an object attribute
+        these attributes prepopulate the form 
+         -->
+        <form method="post" th:object="${grades}">
+            <input type="text" placeholder="Name" th:field="*{name}">
+            <input type="text" placeholder="Subject" th:field="*{subject}">
+            <input type="text" placeholder="Score" th:field="*{score}">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+</html>
