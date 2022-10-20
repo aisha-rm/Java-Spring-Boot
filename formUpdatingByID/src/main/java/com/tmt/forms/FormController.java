@@ -3,8 +3,11 @@ package com.tmt.forms;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,8 +43,14 @@ public class FormController {
     //SB uses the empty constuctor and setters to update the object fields
     //grade object needs to be added to ArrayList to update it
     @PostMapping("/handleSubmit")
-    public String submitForm(Grade grade){
-        //check if the grade from the form exists
+    public String submitForm(@Valid Grade grade, BindingResult result, Model model){
+
+        
+        if (result.hasErrors()) {
+            
+            return "form";//keep user in from if error in validation, not redirect so as not to lose th BR info
+        }
+
         int index=getGradeIndex(grade.getId());
         if (index == Constants.NOT_FOUND){
             //if it doesnt, add it to the datastore
