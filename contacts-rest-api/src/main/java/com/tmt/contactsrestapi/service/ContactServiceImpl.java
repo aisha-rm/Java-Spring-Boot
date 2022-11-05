@@ -16,7 +16,7 @@ public class ContactServiceImpl implements ContactService {
     @Autowired
     private ContactRepository contactRepository;
     
-
+    @Override
     public List<Contact> getContacts() {
         return contactRepository.getContacts();
     }
@@ -25,6 +25,7 @@ public class ContactServiceImpl implements ContactService {
         return contactRepository.getContact(index);
     }
 
+    @Override
     public void saveContact(Contact contact) {
         contactRepository.saveContact(contact);
     }
