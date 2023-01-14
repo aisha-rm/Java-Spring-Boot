@@ -21,14 +21,16 @@ public class ContactServiceImpl implements ContactService {
         return contactRepository.getContacts();
     }
 
-    public Contact getContact(int index) {
-        return contactRepository.getContact(index);
-    }
-
     @Override
     public void saveContact(Contact contact) {
         contactRepository.saveContact(contact);
     }
+
+    /*
+    public Contact getContact(int index) {
+        return contactRepository.getContact(index);
+    }
+
 
     public void updateContact(int index, Contact contact) { 
         contactRepository.updateContact(index, contact); 
@@ -37,8 +39,10 @@ public class ContactServiceImpl implements ContactService {
     public void deleteContact(int index) {
         contactRepository.deleteContact(index);
     }
+    */
 
     private int findIndexById(String id) {
+        //returns index of obj when given its id
         return IntStream.range(0, contactRepository.getContacts().size())
             .filter(index -> contactRepository.getContacts().get(index).getId().equals(id))
             .findFirst()
@@ -49,6 +53,17 @@ public class ContactServiceImpl implements ContactService {
     public Contact getContactById(String id) {
         //accesses repo to get contact, using index generated from id
         return contactRepository.getContact(findIndexById(id));
+    }
+
+    @Override
+    public void updateContactById(String id, Contact contact){
+        contactRepository.updateContact(findIndexById(id), contact);
+    }
+
+    @Override
+    public void deleteContactById(String id) {
+        contactRepository.deleteContact(findIndexById(id));
+        
     }
 
 }

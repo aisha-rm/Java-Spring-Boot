@@ -10,7 +10,7 @@ import com.tmt.contactsrestapi.pojo.Contact;
 @Repository
 public class ContactRepository {
     
-    private List<Contact> contacts = new ArrayList<>();
+    private List<Contact> contacts = new ArrayList<>(); //the post request will create the objs to be stored here
     
     public List<Contact> getContacts() {
         return contacts;
