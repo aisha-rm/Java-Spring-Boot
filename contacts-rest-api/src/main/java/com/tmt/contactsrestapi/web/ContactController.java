@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tmt.contactsrestapi.exception.NoContactException;
 import com.tmt.contactsrestapi.pojo.Contact;
 import com.tmt.contactsrestapi.service.ContactService;
 
@@ -36,8 +37,14 @@ public class ContactController {
     //id is the expected uri to be specified in the get request
     public ResponseEntity<Contact> getContact(@PathVariable String id){
         //ResponseEntity allows returning data and status code. data to be returned is in the <>
-        Contact contact = contactService.getContactById(id);
-        return new ResponseEntity<>(contact, HttpStatus.OK);
+        try{
+            Contact contact = contactService.getContactById(id);
+            return new ResponseEntity<>(contact, HttpStatus.OK);
+        }
+        catch (NoContactException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }
     }
 
     @PostMapping("/contact")
@@ -51,15 +58,25 @@ public class ContactController {
     @PutMapping("contact/{id}")
     //update contact by using its id
     public ResponseEntity<Contact> updateContact(@PathVariable String id, @RequestBody Contact contact){
-        contactService.updateContactById(id,contact );
-        //send back updated contact as below with status
-        return new ResponseEntity<>(contactService.getContactById(id), HttpStatus.OK);
+        try{    
+            contactService.updateContactById(id,contact );
+            //send back updated contact as below with status
+            return new ResponseEntity<>(contactService.getContactById(id), HttpStatus.OK);
+        }
+        catch (NoContactException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("contact/{id}")
     public ResponseEntity<HttpStatus> deleteContact(@PathVariable String id){
-        contactService.deleteContactById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        try {
+            contactService.deleteContactById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        catch (NoContactException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
    

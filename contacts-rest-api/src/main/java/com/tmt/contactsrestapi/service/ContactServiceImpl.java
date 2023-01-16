@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tmt.contactsrestapi.exception.NoContactException;
 import com.tmt.contactsrestapi.pojo.Contact;
 import com.tmt.contactsrestapi.repository.ContactRepository;
 
@@ -41,27 +42,27 @@ public class ContactServiceImpl implements ContactService {
     }
     */
 
-    private int findIndexById(String id) {
+    private int findIndexById(String id) throws NoContactException {
         //returns index of obj when given its id
         return IntStream.range(0, contactRepository.getContacts().size())
             .filter(index -> contactRepository.getContacts().get(index).getId().equals(id))
             .findFirst()
-            .orElseThrow();
+            .orElseThrow(() -> new NoContactException());
     }
 
     @Override
-    public Contact getContactById(String id) {
+    public Contact getContactById(String id) throws NoContactException {
         //accesses repo to get contact, using index generated from id
         return contactRepository.getContact(findIndexById(id));
     }
 
     @Override
-    public void updateContactById(String id, Contact contact){
+    public void updateContactById(String id, Contact contact) throws NoContactException{
         contactRepository.updateContact(findIndexById(id), contact);
     }
 
     @Override
-    public void deleteContactById(String id) {
+    public void deleteContactById(String id) throws NoContactException {
         contactRepository.deleteContact(findIndexById(id));
         
     }
