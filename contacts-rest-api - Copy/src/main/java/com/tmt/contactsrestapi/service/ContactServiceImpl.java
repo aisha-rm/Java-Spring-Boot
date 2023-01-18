@@ -47,7 +47,8 @@ public class ContactServiceImpl implements ContactService {
         return IntStream.range(0, contactRepository.getContacts().size())
             .filter(index -> contactRepository.getContacts().get(index).getId().equals(id))
             .findFirst()
-            .orElseThrow(() -> new ContactNotFoundException(id));  //Throw the new unchecked exception class
+            .orElseThrow(() -> new ContactNotFoundException(id));  //Throw the new unchecked exception class 
+            //the exception doesnt need to be added to the method definition
     }
 
     @Override

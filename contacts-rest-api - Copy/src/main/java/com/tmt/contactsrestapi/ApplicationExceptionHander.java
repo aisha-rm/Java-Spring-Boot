@@ -15,8 +15,8 @@ public class ApplicationExceptionHander {
         //the thrown exception can be accessed from the arguments
         //the return type is comon practice as Object alows us to pass anything into ResponseEntity
 
-        ErrorResponse error = new ErrorResponse(ex.getMessage());   //SB serialises the error object into JSON
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());   //SB serialises the error object into JSON
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
     
 }

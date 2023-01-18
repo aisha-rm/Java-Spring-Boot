@@ -1,6 +1,7 @@
 package com.tmt.contactsrestapi.exception;
 
-public class ContactNotFoundException extends RuntimeException {
+public class ContactNotFoundException extends RuntimeException {//runtime exception doesnt force you to catch it
+    
     public ContactNotFoundException(String id) {
         //constructor gets called when exception is thrown 
         super("The id '"+ id + "' does not exist in our records");
